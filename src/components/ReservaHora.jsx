@@ -41,10 +41,10 @@ const ReservaTuHora = () => {
                   }}
                 >
                   <Card
-                    className='col-12 col-lg-4'
+                    className='col-12 col-md-4 col-lg-4'
                     sx={{
                       boxShadow: 0,
-                      display: 'inline-block',
+                      display: 'block',
                       padding: '2em 0',
                       bgcolor: '#f1f1f1'
                     }}>
@@ -58,10 +58,10 @@ const ReservaTuHora = () => {
                   </Card>
 
                   <Card
-                    className='col-12 col-lg-8'
+                    className='col-12 col-md-8 col-lg-8'
                     sx={{
                       boxShadow: 0,
-                      display: 'inline-block',
+                      display: 'block',
                       height: matches ? "100%" : "fit-content",
                       display: 'flex',
                       flexDirection: 'column',

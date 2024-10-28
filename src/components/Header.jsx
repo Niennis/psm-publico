@@ -47,6 +47,8 @@ const Header = () => {
   const matches = useMediaQuery('(min-width:600px)');
   const [style, setStyle] = useState({ width: 'min-content' });
 
+  const BOTON_RESERVAR = process.env.NEXT_PUBLIC_ACTIVATE_BUTTON === "true"
+  
   const isSmallDevice = useMediaQuery(
     "only screen and (max-width : 640px)"
   );
@@ -59,7 +61,7 @@ const Header = () => {
   const isExtraLargeDevice = useMediaQuery(
     "only screen and (min-width : 1025px)"
   );
-
+  const isDesktop = useMediaQuery('(min-width:768px)');
   useEffect(() => {
     const handleResize = () => {
       const width = window.innerWidth;
@@ -93,13 +95,6 @@ const Header = () => {
     setAnchorElNav(null);
   };
 
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
     // setActiveSection(id);
@@ -119,210 +114,229 @@ const Header = () => {
       style={{
         background: 'white',
         color: 'black',
-        margin: 0,
+        justifyContent: matches ? 'center' : 'flex-end',
+        margin: "0", // 0 72px
         maxHeight: '112px',
         minHeight: '98px',
-        justifyContent: matches ? 'center' : 'flex-end'
+        width: '100vw',
       }}
     >
       <Container maxWidth="false" style={{ background: 'white', color: 'black' }}>
         <Toolbar disableGutters>
-          {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="/"
-            sx={{
-              mr: 2,
-              display: { xs: 'none', lg: 'flex' },
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-              fontFamily: 'sailec'
-            }}
-          >
-            <Image
-              src={logo.src}
-              width={263}
-              height={70}
-              alt="Logo"
-            />{" "}
-          </Typography>
+          {isDesktop ? (
+            <>
+              {/* MENU DASHBOARD */}
+              <Typography
+                variant="h6"
+                noWrap
+                component="a"
+                href="/"
+                sx={{
+                  mr: 2,
+                  display: { xs: 'none', lg: 'flex' },
+                  fontWeight: 700,
+                  letterSpacing: '.3rem',
+                  color: 'inherit',
+                  textDecoration: 'none',
+                  fontFamily: 'sailec'
+                }}
+              >
+                <Image
+                  alt="Logo"
+                  src={`${process.env.NEXT_PUBLIC_BASE_IMG}logo02.png${process.env.NEXT_PUBLIC_KEY_IMG}`}
+                  height={0}
+                  width={0}
+                  priority
+                  sizes="100%"
+                  style={{
+                    height: '70px',
+                    width: '263px',
 
-          {/*  MENU MOBILE */}
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleOpenNavMenu}
-              color="inherit"
-            >
-              <MenuIcon />
-            </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'left',
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
-              sx={{
-                display: { xs: 'block', lg: 'none' },
-              }}
-            >
-              {
-                pages.map((page) => (
-                  <MenuItem key={page.title} onClick={handleCloseNavMenu}>
-                    <Typography textAlign="center" className="sailec">
-                      <a href={page.url} style={{ color: 'black', fontFamily: 'sailec' }}>
+                  }}
+                />{" "}
+              </Typography>
+              <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'flex-end' }}>
+                {pages.map((page) => {
+                  return (
+                    <Link style={{ color: 'black', textDecoration: 'none' }} href={page.url} key={page.title} >
+                      <Button
+                        className={`sailec ${activeSection === page.label
+                          ? 'active-header'
+                          : ''
+                          }`}
+
+                        onClick={() => handleNavClick(page.label)}
+                        sx={{ ...style, fontFamily: 'sailecmedium', my: 2, color: 'black', display: 'block' }}
+                      >
                         {page.title}
-                      </a>
-                    </Typography>
-                  </MenuItem>
-                ))
-              }
-              <MenuItem onClick={handleOpenUserMenu}>
-                <Typography textAlign="center" className="sailec" sx={{ color: '#000000', fontFamily: 'sailec' }}>
-                  CÓMO TRABAJAMOS <FaChevronDown />
-                </Typography>
-              </MenuItem>
+                      </Button>
+                    </Link>
+                  )
+                }
+                )}
+                <Tooltip title="Como trabajamos">
+                  <Button
+                    className={`sailec ${activeSection === 'como_trabajamos'
+                      ? 'active-header'
+                      : ''
+                      }`}
+                    onClick={handleOpenUserMenu} sx={{ ...style, p: 0, m: '0 15px 0 0', fontFamily: 'sailecmedium', color: 'black', marginTop: '16px', marginBottom: '16px' }}>
+                    CÓMO TRABAJAMOS
+                  </Button>
+                </Tooltip>
 
-              <Box sx={{ flexGrow: 0 }} className={`sailec `}>
+                <Box sx={{ flexGrow: 0 }} className={`sailec `}>
+                  <Menu
+                    sx={{ mt: '45px' }}
+                    id="menu-appbar"
+                    anchorEl={anchorElUser}
+                    anchorOrigin={{
+                      vertical: 'top',
+                      horizontal: 'right',
+                    }}
+                    keepMounted
+                    transformOrigin={{
+                      vertical: 'top',
+                      horizontal: 'right',
+                    }}
+                    open={Boolean(anchorElUser)}
+                    onClose={handleCloseUserMenu}
+                  >
+                    {subMenu.map((setting) => (
+                      <MenuItem key={setting.url} onClick={handleCloseUserMenu}>
+                        <Typography textAlign="center" className="sailec">
+                          <a href={setting.url} style={{ color: 'black', fontFamily: 'sailec', textDecoration: 'none' }}>
+                            {setting.title}
+                          </a>
+                        </Typography>
+                      </MenuItem>
+                    ))}
+                  </Menu>
+                </Box>
+              </Box>
+            </>
+          ) : (
+            <>
+              {/*  MENU MOBILE */}
+              <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+                <IconButton
+                  size="large"
+                  aria-label="account of current user"
+                  aria-controls="menu-appbar"
+                  aria-haspopup="true"
+                  onClick={handleOpenNavMenu}
+                  color="inherit"
+                >
+                  <MenuIcon />
+                </IconButton>
                 <Menu
-                  sx={{ mt: '45px' }}
                   id="menu-appbar"
-                  anchorEl={anchorElUser}
+                  anchorEl={anchorElNav}
                   anchorOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right',
+                    vertical: 'bottom',
+                    horizontal: 'left',
                   }}
                   keepMounted
                   transformOrigin={{
                     vertical: 'top',
-                    horizontal: 'right',
+                    horizontal: 'left',
                   }}
-                  open={Boolean(anchorElUser)}
-                  onClose={handleCloseUserMenu}
+                  open={Boolean(anchorElNav)}
+                  onClose={handleCloseNavMenu}
+                  sx={{
+                    display: { xs: 'block', lg: 'none' },
+                  }}
                 >
-                  {subMenu.map((setting) => (
-                    <MenuItem key={setting.url} onClick={handleCloseUserMenu}>
-                      <Typography textAlign="center" className="sailec">
-                        <a href={setting.url} style={{ color: 'black', fontFamily: 'sailec', textDecoration: 'none' }}>
-                          {setting.title}
-                        </a>
-                      </Typography>
-                    </MenuItem>
-                  ))}
-                </Menu>
-              </Box>
-            </Menu>
-          </Box>
-          <Typography
-            variant="h5"
-            noWrap
-            component="a"
-            href="/"
-            sx={{
-              mr: { xs: 0, lg: 2 },
-              display: { xs: 'flex', lg: 'none' },
-              flexGrow: 1,
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-              fontFamily: 'sailec',
-            }}
-          >
-            <Image
-              src={'https://github.com/Niennis/imagesudp/blob/main/UDP_Logo_small.png?raw=true'}
-              height={0}
-              width={100}
-              alt="logo udp"
-              style={{
-                width: '100px',
-                height: 'auto',
-              }} />{" "}
-          </Typography>
-
-          {/* MENU DASHBOARD */}
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'flex-end' }}>
-            {pages.map((page) => {
-              return (
-                <Link style={{ color: 'black', textDecoration: 'none' }} href={page.url} key={page.title} >
-                  <Button
-                    className={`sailec ${activeSection === page.label
-                      ? 'active-header'
-                      : ''
-                      }`}
-
-                    onClick={() => handleNavClick(page.label)}
-                    sx={{ ...style, fontFamily: 'sailecmedium', my: 2, color: 'black', display: 'block' }}
-                  >
-                    {page.title}
-                  </Button>
-                </Link>
-              )
-            }
-            )}
-            <Tooltip title="Como trabajamos">
-              <Button
-                className={`sailec ${activeSection === 'como_trabajamos'
-                  ? 'active-header'
-                  : ''
-                  }`}
-                onClick={handleOpenUserMenu} sx={{ ...style, p: 0, m: '0 15px 0 0', fontFamily: 'sailecmedium', color: 'black', marginTop: '16px', marginBottom: '16px' }}>
-                CÓMO TRABAJAMOS
-              </Button>
-            </Tooltip>
-
-            <Box sx={{ flexGrow: 0 }} className={`sailec `}>
-              <Menu
-                sx={{ mt: '45px' }}
-                id="menu-appbar"
-                anchorEl={anchorElUser}
-                anchorOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                open={Boolean(anchorElUser)}
-                onClose={handleCloseUserMenu}
-              >
-                {subMenu.map((setting) => (
-                  <MenuItem key={setting.url} onClick={handleCloseUserMenu}>
-                    <Typography textAlign="center" className="sailec">
-                      <a href={setting.url} style={{ color: 'black', fontFamily: 'sailec', textDecoration: 'none' }}>
-                        {setting.title}
-                      </a>
+                  {
+                    pages.map((page) => (
+                      <MenuItem key={page.title} onClick={handleCloseNavMenu}>
+                        <Typography textAlign="center" className="sailec">
+                          <a href={page.url} style={{ color: 'black', fontFamily: 'sailec' }}>
+                            {page.title}
+                          </a>
+                        </Typography>
+                      </MenuItem>
+                    ))
+                  }
+                  <MenuItem onClick={handleOpenUserMenu}>
+                    <Typography textAlign="center" className="sailec" sx={{ color: '#000000', fontFamily: 'sailec' }}>
+                      CÓMO TRABAJAMOS <FaChevronDown />
                     </Typography>
                   </MenuItem>
-                ))}
-              </Menu>
-            </Box>
-          </Box>
 
-          {/* <Box sx={{ flexGrow: 0 }}>
-            <ReserveBtn text={'Reservar'} bgColor={'#FABB00'} color={'#000'} />
-            <Link href="#" style={{ textDecoration: 'none', cursor: 'not-allowed' }} >
-              <FaUserCircle style={{ fontSize: matches ? '50px' : '38px', color: '#000', border: '1px solid #ff5253', borderRadius: '50px', padding: '5px', marginLeft: '5px', background: '#b82925', color: '#fff', fontFamily: 'sailec' }} />
-            </Link>
-          </Box> */}
+                  <Box sx={{ flexGrow: 0 }} className={`sailec `}>
+                    <Menu
+                      sx={{ mt: '45px' }}
+                      id="menu-appbar"
+                      anchorEl={anchorElUser}
+                      anchorOrigin={{
+                        vertical: 'top',
+                        horizontal: 'right',
+                      }}
+                      keepMounted
+                      transformOrigin={{
+                        vertical: 'top',
+                        horizontal: 'right',
+                      }}
+                      open={Boolean(anchorElUser)}
+                      onClose={handleCloseUserMenu}
+                    >
+                      {subMenu.map((setting) => (
+                        <MenuItem key={setting.url} onClick={handleCloseUserMenu}>
+                          <Typography textAlign="center" className="sailec">
+                            <a href={setting.url} style={{ color: 'black', fontFamily: 'sailec', textDecoration: 'none' }}>
+                              {setting.title}
+                            </a>
+                          </Typography>
+                        </MenuItem>
+                      ))}
+                    </Menu>
+                  </Box>
+                </Menu>
+              </Box>
+              <Typography
+                variant="h5"
+                noWrap
+                component="a"
+                href="/"
+                sx={{
+                  mr: { xs: 0, lg: 2 },
+                  display: { xs: 'flex', lg: 'none' },
+                  flexGrow: 1,
+                  fontFamily: 'monospace',
+                  fontWeight: 700,
+                  letterSpacing: '.3rem',
+                  color: 'inherit',
+                  textDecoration: 'none',
+                  fontFamily: 'sailec',
+                }}
+              >
+                <Image
+                  src={'https://github.com/Niennis/imagesudp/blob/main/UDP_Logo_small.png?raw=true'}
+                  height={0}
+                  width={0}
+                  alt="logo udp"
+                  sizes="100%"
+                  style={{
+                    height: 'auto',
+                    width: '100px',
+                  }} />{" "}
+              </Typography>
+
+            </>
+          )}
+
+          {
+           BOTON_RESERVAR  ?
+            <Box sx={{ flexGrow: 0 }}>
+              <ReserveBtn text={'Reservar'} bgColor={'#FABB00'} color={'#000'} />
+              <Link href="#" style={{ textDecoration: 'none', cursor: 'not-allowed' }} >
+                <FaUserCircle style={{ fontSize: matches ? '50px' : '38px', color: '#000', border: '1px solid #ff5253', borderRadius: '50px', padding: '5px', marginLeft: '5px', background: '#b82925', color: '#fff', fontFamily: 'sailec' }} />
+              </Link>
+            </Box>
+            : ''
+          }
+
         </Toolbar>
       </Container>
     </AppBar >

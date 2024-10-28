@@ -7,7 +7,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 // import TextEditor from '../../../components/TextEditor';
 // import Sidebar from '../../../components/Sidebar';
-// import FeatherIcon from 'feather-icons-react/build/FeatherIcon';
+import FeatherIcon from 'feather-icons-react/build/FeatherIcon';
 // import Select from "react-select";
 /* eslint-disable no-unused-vars */
 import { fetchBlog } from '@/services/BlogServices';
@@ -140,7 +140,7 @@ const Blogdetails = ({ params }) => {
                     </div>
                     <article className="blog blog-single-post d-flex justify-content-between flex-wrap" >
 
-                      {/*       <div className="blog-info clearfix" style={{ padding: 0, margin: 5 }}>
+                            <div className="blog-info clearfix" style={{ padding: 0, margin: 5 }}>
                         <div className="post-left date-blks">
                           <ul>
                             <li>
@@ -171,7 +171,7 @@ const Blogdetails = ({ params }) => {
                             </li>
                           </ul>
                         </div>
-                      </div> */}
+                      </div>
 
                       {/* TEXTO */}
                       <div className="sailec col-lg-10 col-12" style={{ marginLeft: '0px' }}>

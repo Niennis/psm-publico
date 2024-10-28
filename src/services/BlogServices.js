@@ -11,10 +11,7 @@ export const fetchBlogs = async () => {
       }
     })
 
-    console.log('LA DATA', data)
-
     const blogs = await data.json()
-    console.log('BLOGS', blogs);
     return blogs
   } catch (err) {
     console.log(err)

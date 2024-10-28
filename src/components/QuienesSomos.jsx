@@ -41,7 +41,7 @@ const QuienesSomos = () => {
                   }}
                 >
                   <Card
-                    className='col-12 col-lg-8'
+                    className='col-12 col-md-8 col-lg-8'
                     sx={{
                       boxShadow: 0,
                       display: 'inline-block',
@@ -96,7 +96,7 @@ const QuienesSomos = () => {
                   </Card>
 
                   <Card
-                    className='col-12 col-lg-4'
+                    className='col-12 col-md-4 col-lg-4'
                     sx={{
                       boxShadow: 0,
                       display: 'inline-block',

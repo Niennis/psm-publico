@@ -1,18 +1,18 @@
 'use client'
+import { useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { white_logo, white_acreditacion, logo02_white } from './imagepath';
-import { Box, useMediaQuery } from '@mui/material';
 
+import { logo02_white } from './imagepath';
+
+import { Box, useMediaQuery } from '@mui/material';
 import { FaFacebookF, FaLinkedinIn, FaTwitter, FaYoutube } from "react-icons/fa";
 import { BsInstagram } from "react-icons/bs";
 import { FaLocationDot } from "react-icons/fa6";
 import ReserveBtn from './ReserveBtn';
-import { useEffect } from 'react';
 
 const FooterDae = () => {
   const matches = useMediaQuery('(min-width:600px)');
-
   const LINKS = [
     {
       title: 'Departamento de vida universitaria',
@@ -96,7 +96,7 @@ const FooterDae = () => {
                   LINKS.map((link, index) => (
                     <div
                       key={index}
-                      className='col-lg-6 col-12 links-footer'
+                      className=' col-12 col-lg-6 links-footer'
                       style={{ borderBottom: '1px solid #fff', width: matches ? '47%' : '90%', margin: '10px' }}>
                       <Link href={link.url} style={{ margin: '10px', color: '#fff' }}>
                         {link.title}
