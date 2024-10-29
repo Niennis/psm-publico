@@ -1,15 +1,13 @@
 'use client'
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
-import Image from "next/image";
-
-import { blogs } from "@/utils/blogs";
-import { fetchBlogs } from "@/services/BlogServices";
-
+import { CircleRounded } from "@mui/icons-material";
 import { Grid, Box, Typography, Tab, Tabs, useMediaQuery } from "@mui/material";
-import { MdOutlineChromeReaderMode, MdCircle } from "react-icons/md";
+import Image from "next/image";
+import { MdOutlineChromeReaderMode } from "react-icons/md";
+import { blogs } from "@/utils/blogs";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import zIndex from "@mui/material/styles/zIndex";
+import { fetchBlogs } from "@/services/BlogServices";
 
 const theme = createTheme({
   palette: {
@@ -23,18 +21,42 @@ const theme = createTheme({
 });
 
 const styles = [
-  { id: 0, key: 'banner01', color: '#3886FF', border: '#A5C8FF', },
-  { id: 1, key: 'banner02', color: '#FABB00', border: '#FFCB7E', },
-  { id: 2, key: 'banner03', color: '#1ABC9C', border: '#73CDCD', },
-  { id: 3, key: 'banner04', color: '#B82925', border: '#FF5253', },
+  {
+    id: 0,
+    key: 'banner01',
+    color: '#3886FF',
+    border: '#A5C8FF',
+  },
+  {
+    id: 1,
+    key: 'banner02',
+    color: '#FABB00',
+    border: '#FFCB7E',
+  },
+  {
+    id: 2,
+    key: 'banner03',
+    color: '#1ABC9C',
+    border: '#73CDCD',
+  },
+  {
+    id: 3,
+    key: 'banner04',
+    color: '#B82925',
+    border: '#FF5253',
+  },
+
 ]
 
 const estimateReadingTime = text => {
   const wordsPerMinute = 250;
-  return Math.ceil(text.split(/\s+/).length / wordsPerMinute);;
+  const words = text.split(/\s+/).length;
+  const readingTimeMinutes = words / wordsPerMinute;
+
+  return Math.ceil(readingTimeMinutes);
 }
 
-const CustomTabPanel = ({ children, value, index, deviceStyles }) => {
+const CustomTabPanel = ({ children, value, index, isShort, isMediumDevice }) => {
   return (
     <div
       role="tabpanel"
@@ -46,7 +68,12 @@ const CustomTabPanel = ({ children, value, index, deviceStyles }) => {
         <Box sx={{ p: 3 }}>
           <Typography
             className="sailec-medium"
-            sx={deviceStyles}>{children}</Typography>
+            sx={{
+              fontWeight: 400,
+              fontSize: isMediumDevice ? '14px' : isShort ? '18px' : '20px',
+              lineHeight: isMediumDevice ? '20px' : '28px',
+              fontFamily: 'sailec'
+            }}>{children}</Typography>
         </Box>
       )}
     </div>
@@ -73,73 +100,87 @@ const ImageSlider = ({ innerRef }) => {
   const [color, setColor] = useState(blogs[0].color)
   const [idBlog, setIdBlog] = useState(blogs[0].id)
   const [data, setData] = useState(null)
-  const [apiLlamada, setApiLlamada] = useState(false); // Nueva bandera
-
-  const [apiData, setApiData] = useState(null);
+  const [apiCall, setApiCall] = useState(false); // Nueva bandera
 
   const [value, setValue] = useState(0);
 
-  const isSmallDevice = useMediaQuery("(max-width : 640px)");
-  const isMediumDevice = useMediaQuery("(min-width : 641px) and (max-width : 768px)");
-  const isLargeDevice = useMediaQuery("(min-width : 769px) and (max-width : 1024px)");
-  const isExtraLargeDevice = useMediaQuery("(min-width : 1025px)");
-  const isShortDevice = useMediaQuery("(max-height: 700px)");
+  const isSmallDevice = useMediaQuery("max-width : 640px)");
+  const isMediumDevice = useMediaQuery("min-width : 641px) and (max-width : 768px)");
+
+  const isShortDevice = useMediaQuery("max-height: 700px)")
 
   const fetch = async () => {
-    // if (!apiLlamada) {
-
-    //     try {
-    //       const response = await fetchBlogs();
-    //       // const result = await response.json();
-    //       setData(response);
-    //       setApiLlamada(true); // Marca que ya se hizo la llamada
-    //       console.log('RESULT', response)
-    //     } catch (error) {
-    //       console.log('ERRORSH', error.message);
-    //     }
-    // }
+    if (!apiCall) {
+      try {
+        const response = await fetchBlogs();
+        // const result = await response.json();
+        setData(response);
+        setApiCall(true); // Marca que ya se hizo la Call
+        console.log('RESULT', response)
+      } catch (error) {
+        console.log('ERRORSH', error.message);
+      }
+    }
   }
 
-  const fetchData = useCallback(async () => {
-    try {
-      const data = await fetchBlogs();
-      setApiData(data);
-    } catch (error) {
-      console.error('Error fetching blogs:', error);
-    }
-  }, []);
-
-  useEffect(() => {
-    fetchData();
-  }, [fetchData]);
-
-
-  const changeSlide = useCallback(() => {
-    const newIndex = (currentIndex + 1) % slides.length;
-    updateSlideContent(newIndex);
-  }, [currentIndex, slides.length]);
-
   const resetTimeout = () => {
-    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
   };
 
   useEffect(() => {
+    // Función para manejar el cambio de slide
+    const changeSlide = () => {
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % totalSlides);
+      goToNext()
+    };
+
+    fetch()
+
+    // Función para manejar el cambio de tamaño de la ventana
+    const handleResize = () => {
+      const height = window.innerHeight;
+
+      if (height < 900) {
+        setIsShort(true);
+        // } else if (height < 1450) {
+        //   setIsShort(true);
+      } else {
+        setIsShort(false);
+      }
+    };
+
+    // Configurar el timeout para cambiar el slide cada 8 segundos
     resetTimeout();
     timeoutRef.current = setTimeout(changeSlide, 8000);
-    return () => resetTimeout();
-  }, [changeSlide]);
 
-  const updateSlideContent = newIndex => {
-    setCurrentIndex(newIndex);
-    setTitle(slides[newIndex].titulo);
-    setContent(truncateWords(slides[newIndex].bajada, 205));
-    setColor(styles[newIndex].color);
-    setIdBlog(slides[newIndex].id);
-  };
+    // Agregar el event listener para el cambio de tamaño de la ventana
+    if (typeof window !== 'undefined') {
+      window.addEventListener('resize', handleResize);
+      handleResize(); // Llama a handleResize inicialmente para configurar el tamaño correcto
+    }
+
+    // Cleanup: Limpia el timeout y el event listener cuando el componente se desmonte o los valores dependientes cambien
+    return () => {
+      resetTimeout();
+      if (typeof window !== 'undefined') {
+        window.removeEventListener('resize', handleResize);
+      }
+    };
+  }, [currentIndex, totalSlides, apiCall]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
+  const truncateWords = (text, num) => {
+    if (text.length <= num) return text;
+
+    const sliced = text.slice(0, num);
+    const indexLastBlankSpace = sliced.lastIndexOf(' ');
+    return `${sliced.slice(0, indexLastBlankSpace)}...`;
+  }
 
   const imgHeightMobile = '80vh'
   const imgHeightDesktop = '100vh'
@@ -156,8 +197,6 @@ const ImageSlider = ({ innerRef }) => {
     height: imgHeightDesktop,
     backgroundPosition: 'top',
     backgroundSize: 'cover',
-    position: 'relative',
-    zIndex: '-1',
   }
 
   const slideStylesMobile = {
@@ -179,12 +218,15 @@ const ImageSlider = ({ innerRef }) => {
     // color: '#fff'
   }
 
-  const truncateWords = (text, num) => {
-    if (text.length <= num) return text;
 
-    const sliced = text.slice(0, num);
-    const indexLastBlankSpace = sliced.lastIndexOf(' ');
-    return `${sliced.slice(0, indexLastBlankSpace)}...`;
+  const goToNext = () => {
+    const isLastSlide = currentIndex === slides.length - 1
+    const newIndex = isLastSlide ? 0 : currentIndex + 1
+    setCurrentIndex(newIndex)
+    setTitle(slides[newIndex].titulo)
+    setContent(truncateWords(slides[newIndex].bajada, 205))
+    setColor(styles[newIndex].color)
+    setIdBlog(slides[newIndex].id)
   }
 
   const goToSlide = slideIndex => {
@@ -194,11 +236,6 @@ const ImageSlider = ({ innerRef }) => {
     setColor(styles[slideIndex].color)
     setIdBlog(slides[slideIndex].id)
   }
-
-  const deviceStyles = {
-    fontSize: isMediumDevice ? '14px' : isShortDevice ? '18px' : '20px',
-    lineHeight: isMediumDevice ? '20px' : '28px',
-  };
 
   const boxStyleDesktop = {
     alignItems: 'flex-start',
@@ -212,10 +249,8 @@ const ImageSlider = ({ innerRef }) => {
   }
 
   const boxStyleMobile = {
-    // alignItems: 'center', Mejor sacarlo
     display: 'flex',
     height: isShortDevice ? '100vh' : imgHeightMobile, // 100vh si es chico, imgHeightMobile si es grande
-    // margin: 'auto 0px',
     marginTop: isShortDevice ? '-100vh' : 'calc(-80vh)', // -100vh si es chico, 'calc(-100vh + 150px)' si es grande
     padding: '24px 16px',
     textWrap: 'pretty',
@@ -230,7 +265,7 @@ const ImageSlider = ({ innerRef }) => {
           {/* DESKTOP */}
           <div style={matches && slideStyles}>
             <Image
-              src={slides[currentIndex].imagen}
+              src={`${process.env.NEXT_PUBLIC_BASE_IMG}${slides[currentIndex].imagen}${process.env.NEXT_PUBLIC_KEY_IMG}`}
               alt={slides[currentIndex].imagen}
               fill
               sizes="100vw"
@@ -308,8 +343,8 @@ const ImageSlider = ({ innerRef }) => {
             <CustomTabPanel
               value={slides[currentIndex].key}
               index={slides[currentIndex].key}
-              deviceStyles={deviceStyles}
-            // isMediumDevice={isMediumDevice}
+              isShort={isShort}
+              isMediumDevice={isMediumDevice}
             >
               {slides[currentIndex].bajada.slice(0, 200)}
             </CustomTabPanel>
@@ -394,7 +429,7 @@ const ImageSlider = ({ innerRef }) => {
                       }}> Ver más + </button>
                   </Link>
                   <Image
-                    src={slides[currentIndex].imagen}
+                    src={`${process.env.NEXT_PUBLIC_BASE_IMG}${slides[currentIndex].imagen}${process.env.NEXT_PUBLIC_KEY_IMG}`}
                     alt={slides[currentIndex].imagen}
                     width={0}
                     height={0}
@@ -426,7 +461,7 @@ const ImageSlider = ({ innerRef }) => {
                 style={dotStyles}
                 onClick={() => goToSlide(slideIndex)}
               >
-                <MdCircle style={{ fontSize: '16px', color: slideIndex === currentIndex ? '#A6A6A6' : '#FFF' }} />
+                <CircleRounded sx={{ fontSize: '16px', color: slideIndex === currentIndex ? '#A6A6A6' : '#FFF' }} />
               </div>
             ))}
           </div>
