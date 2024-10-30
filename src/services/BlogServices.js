@@ -5,7 +5,7 @@ export const fetchBlogs = async () => {
       method: "POST",
       headers: {
         'content-type': 'application/json',
-        // 'access-control-allow-origin': '*',
+        'access-control-allow-origin': '*',
         // 'ngrok-skip-browser-warning': 'any',
         'body': null,
       }
@@ -17,7 +17,6 @@ export const fetchBlogs = async () => {
     console.log(err)
   }
 }
-
 
 export const fetchBlog = async (id) => {
   const BLOGS_API = 'https://showblogbyid-f4dxh4bvgydmdzh6.eastus-01.azurewebsites.net/main'
@@ -31,7 +30,7 @@ export const fetchBlog = async (id) => {
       // cors: "no-cors",
       headers: {
         'content-type': 'application/json',
-        // 'access-control-allow-origin': '*',
+        'access-control-allow-origin': '*',
         // 'ngrok-skip-browser-warning': 'any'
       },
       body: JSON.stringify(body)

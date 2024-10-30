@@ -25,7 +25,7 @@ export default function QuienesSomosLayout({ children }) {
         position: 'relative'
       }}>
         <Image
-          src='https://github.com/Niennis/imagesudp/blob/main/plan_accion_cabecera.jpg?raw=true'
+          src={`${process.env.NEXT_PUBLIC_BASE_IMG}plan_accion_cabecera.jpg${process.env.NEXT_PUBLIC_KEY_IMG}`}
           alt="Quienes somos cabecera"
           height={0}
           width={0}
@@ -42,7 +42,7 @@ export default function QuienesSomosLayout({ children }) {
       </div >
       }
 
-      <div className="row flex-column d-flex align-items-center sailec mt--md-5 section-quienes-somos" /* style={{padding:0, margin: 0}} */>
+      <div className="row flex-column d-flex align-items-center sailec mt--md-5 section-quienes-somos m-0" /* style={{padding:0, margin: 0}} */>
         <div className="col-12 mt--md-5" style={{ padding: 0 }}>
           <div>
             {matches &&

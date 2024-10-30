@@ -116,7 +116,7 @@ const ImageSlider = ({ innerRef }) => {
         // const result = await response.json();
         setData(response);
         setApiCall(true); // Marca que ya se hizo la Call
-        console.log('RESULT', response)
+        // console.log('RESULT', response)
       } catch (error) {
         console.log('ERRORSH', error.message);
       }
@@ -187,7 +187,10 @@ const ImageSlider = ({ innerRef }) => {
 
   const sliderStyles = {
     position: 'relative',
-    margin: 0,
+    marginTop: 0,
+    marginBottom: 0,
+    marginLeft: 0,
+    marginRight: 0,
     padding: 0,
     width: '100%',
   }
@@ -197,6 +200,8 @@ const ImageSlider = ({ innerRef }) => {
     height: imgHeightDesktop,
     backgroundPosition: 'top',
     backgroundSize: 'cover',
+    position: 'relative',
+    zIndex: '-1',
   }
 
   const slideStylesMobile = {
@@ -282,7 +287,7 @@ const ImageSlider = ({ innerRef }) => {
           <Box sx={{ ...boxStyleDesktop, zIndex: 99999 }}>
             <div className="row" >
               <div className="col-sm-12 sailec" style={{
-                width: '100%',
+                width: 'calc(100vw - 60px)',
                 marginLeft: '60px'
               }}>
                 <div className="d-flex flex-column">

@@ -10,7 +10,7 @@ import { AddCircleOutlineOutlined, RemoveCircleOutline } from '@mui/icons-materi
 
 const FrequentAskedQuestions = ({questions}) => {
   const [expanded, setExpanded] = useState(false);
-  const matches = useMediaQuery('(min-width:600px)');
+  const isMediumSize = useMediaQuery('(min-width:768px )');
 
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
@@ -30,8 +30,8 @@ const FrequentAskedQuestions = ({questions}) => {
             }
           >
             <AccordionSummary
-              sx={{ borderBottom: matches && (expanded === question.id) && '1px solid #fff' }}
-              expandIcon={matches && (expanded === question.id
+              sx={{ borderBottom: isMediumSize && (expanded === question.id) && '1px solid #fff' }}
+              expandIcon={isMediumSize && (expanded === question.id
                 ? <RemoveCircleOutline sx={{ color: '#fff' }} />
                 : <AddCircleOutlineOutlined />)
               }

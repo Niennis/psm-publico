@@ -8,7 +8,7 @@ import { FaArrowLeft } from "react-icons/fa";
 import { useRouter, usePathname } from "next/navigation";
 
 export default function QuienesSomosLayout({ children }) {
-  const matches = useMediaQuery('(min-width:600px)');
+  const isMediumSize = useMediaQuery('(min-width:768px)');
   const router = useRouter()
   const pathname = usePathname()
 
@@ -19,7 +19,7 @@ export default function QuienesSomosLayout({ children }) {
 
   return (
     <>
-      {matches && <div style={{
+      {isMediumSize && <div style={{
         height: '620px',
         overflow: 'hidden',
         position: 'relative'
@@ -45,7 +45,7 @@ export default function QuienesSomosLayout({ children }) {
       <div className="row flex-column d-flex align-items-center sailec mt--md-5 section-quienes-somos" /* style={{padding:0, margin: 0}} */>
         <div className="col-12 mt--md-5" style={{ padding: 0 }}>
           <div>
-            {matches &&
+            {isMediumSize &&
               <>
                 <button className='btn mt-4 mb-5'
                   style={{
@@ -62,7 +62,6 @@ export default function QuienesSomosLayout({ children }) {
                 </button>
               </>
             }
-
             {children}
           </div>
         </div>

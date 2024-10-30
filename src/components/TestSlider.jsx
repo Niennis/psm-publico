@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { CircleRounded, ChevronLeft, ChevronRight } from "@mui/icons-material";
 import { Grid, Box, Card } from "@mui/material";
@@ -127,7 +128,7 @@ const TestSlider = ({ slides, innerRef }) => {
           ? <div style={sliderStyles}>
             {slides.length > 2 && <ChevronLeft sx={leftArrowStyles} onClick={prevSlide} />}
             <Box sx={{ textWrap: 'pretty', margin: '0 auto' }}>
-              <div className="row" style={{ backgroundColor: '#F1F1F1', padding: '32px 0 ' }}>
+              <div className="row" style={{ backgroundColor: '#F1F1F1', padding: '32px 0 ',margin: 0, }}>
                 <h2
                   className="sailec"
                   style={{ fontWeight: 700, fontSize: '32px', lineHeight: '40px', textAlign: 'center' }}>
@@ -139,7 +140,7 @@ const TestSlider = ({ slides, innerRef }) => {
                     if (slideIndex < slides.length) {
                       const slide = slides[slideIndex];
                       return (
-                        <div key={slideIndex} className="col-4 sailec" style={{ fontSize: '24px', fontWeight: 400, lineHeight: '32px' }}>
+                        <div key={slideIndex} className="col-4 col-md-5 sailec" style={{ fontSize: '24px', fontWeight: 400, lineHeight: '32px' }}>
                           <Card
                             sx={{
                               boxShadow: '0px 4px 4px 0px rgba(0,0,0,0.45)',
@@ -148,7 +149,18 @@ const TestSlider = ({ slides, innerRef }) => {
                               width: '100%',
                               margin: 'auto',
                             }}>
-                            <CardMedia component="img" height="320" image={slide.imagen} alt="Slide image" />
+                            <div style={{ position: 'relative', height: '320px', width: '100%' }}>
+                              <Image
+                                src={slide.imagen}
+                                alt="Slide image"
+                                fill
+                                sizes="100%"
+                                style={{
+                                  borderRadius: '24px 24px 0 0',
+                                  objectFit: "cover",
+                                }}
+                              />
+                            </div>
                             <CardContent>
                               <Typography variant="body2" color="text.secondary" className="sailec-bold"
                                 sx={{ color: 'black', fontWeight: 700, fontSize: '24px', lineHeight: '32px' }}>{slide.titulo}</Typography>
@@ -202,7 +214,18 @@ const TestSlider = ({ slides, innerRef }) => {
                     return (
                       <div key={slideIndex} className="col-4 sailec" style={{ fontSize: '24px', fontWeight: 400, lineHeight: '32px', width: '100%' }}>
                         <Card sx={{ boxShadow: 0, border: '1px solid #A6A6A6', borderRadius: '12px', width: '90%', margin: 'auto' }}>
-                          <CardMedia component="img" height="320" image={slides[currentIndex].imagen} alt="Slide image" />
+                          <div style={{ position: 'relative', height: '320px', width: '100%' }}>
+                            <Image
+                              src={slides[currentIndex].imagen}
+                              alt="Slide image"
+                              fill
+                              sizes="100%"
+                              style={{
+                                borderRadius: '12px 12px 0 0',
+                                objectFit: "cover",
+                              }}
+                            />
+                          </div>
                           <CardContent>
                             <Typography variant="body2" color="text.secondary" sx={{ color: 'black' }}>{slides[currentIndex].titulo}</Typography>
                             <Typography variant="body2" color="text.secondary">{slides[currentIndex].bajada}</Typography>

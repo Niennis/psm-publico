@@ -14,7 +14,7 @@ const ProtocoloAccionSaludMental = () => {
   };
   return (
 
-    <div className="row prevencion flex-column d-flex " >
+    <div className="row prevencion flex-column d-flex m-0" >
       <div className="col-12" >
         <div className="card quienes-somos" style={{ padding: matches ? '0px 96px' : '120px 32px 0px', margin: '0px', border: 'none' }}>
           <div className="card-body" style={{ padding: '0px', margin: '0px' }}>
@@ -47,6 +47,7 @@ const ProtocoloAccionSaludMental = () => {
                       objectPosition: 'center bottom',
                       height: '100%',
                       width: '100%',
+                      marginBottom: '10px',
                     }}
                   />
                 </div>

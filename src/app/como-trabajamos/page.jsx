@@ -47,7 +47,7 @@ const questions = [
 ]
 
 const IntervencionesClinicas = () => {
-  const matches = useMediaQuery('(min-width:600px)');
+  const isMediumSize = useMediaQuery('(min-width:768px)');
   const [activeTab, setActiveTab] = useState('descripcion-general');
 
   // useEffect(() => {
@@ -62,11 +62,11 @@ const IntervencionesClinicas = () => {
   };
   return (
     <>
-      <div className="row prevencion flex-column d-flex " >
+      <div className="row prevencion flex-column d-flex m-0" >
         <div className="col-12" >
-          <div className="card quienes-somos" style={{ padding: matches ? '0px 96px' : '120px 32px 0px', margin: '0px', border: 'none' }}>
+          <div className="card quienes-somos" style={{ padding: isMediumSize ? '0px 96px' : '120px 32px 0px', margin: '0px', border: 'none' }}>
             <div className="card-body" style={{ padding: '0px', margin: '0px' }}>
-              <h3 className={matches ? "blog-title" : "blog-title-sm"} style={{ marginTop: !matches && '20px', fontSize: '48px', lineHeight: '60px', fontWeight: 700, textWrap: 'balance' }}>
+              <h3 className={isMediumSize ? "blog-title" : "blog-title-sm"} style={{ marginTop: !isMediumSize && '20px', fontSize: '48px', lineHeight: '60px', fontWeight: 700, textWrap: 'balance' }}>
                 Intervenciones clínicas
               </h3>
               <div className="tab-content tab-dsme-content">
@@ -91,10 +91,10 @@ const IntervencionesClinicas = () => {
         </div>
       </div>
 
-      <div className="card quienes-somos" style={{ padding: matches ? '0px 96px' : '20px 32px 0px', margin: '0px', border: 'none', background: '#f1f1f1' }}>
+      <div className="card quienes-somos" style={{ padding: isMediumSize ? '0px 96px' : '20px 32px 0px', margin: '0px', border: 'none', background: '#f1f1f1' }}>
         <Section
           title={'¿Qué es la entrevista de despeje?'}
-          image={'https://github.com/Niennis/imagesudp/blob/main/intervenciones_entrevista_despeje.jpg?raw=true'}
+          image={`${process.env.NEXT_PUBLIC_BASE_IMG}intervenciones_entrevista_despeje.jpg${process.env.NEXT_PUBLIC_KEY_IMG}`}
           left={false}
           bgColor={'#f1f1f1'}
         ><>
@@ -114,10 +114,10 @@ const IntervencionesClinicas = () => {
         </Section>
 
       </div>
-      <div className="card quienes-somos" style={{ padding: matches ? '0px 96px' : '20px 32px 0px', margin: '0px', border: 'none', background: '#ffffff' }}>
+      <div className="card quienes-somos" style={{ padding: isMediumSize ? '0px 96px' : '20px 32px 0px', margin: '0px', border: 'none', background: '#ffffff' }}>
         <Section
           title={'Intervenciones grupales'}
-          image={'https://github.com/Niennis/imagesudp/blob/main/promocion_prevencion_cabecera.jpg?raw=true'}
+          image={`${process.env.NEXT_PUBLIC_BASE_IMG}promocion_prevencion_cabecera.jpg${process.env.NEXT_PUBLIC_KEY_IMG}`}
           left={true}
           bgColor={'#ffffff'}
         >
@@ -140,10 +140,10 @@ const IntervencionesClinicas = () => {
         </Section>
       </div>
 
-      <div className="card quienes-somos" style={{ padding: matches ? '0px' : '20px 32px 0px', margin: '0px', border: 'none', background: '#f1f1f1' }}>
+      <div className="card quienes-somos" style={{ padding: isMediumSize ? '0px 96px' : '20px 32px 0px', margin: '0px', border: 'none', background: '#f1f1f1' }}>
         <Section
           title={'Intervenciones psicoeducativas'}
-          image={'https://github.com/Niennis/imagesudp/blob/main/intervenciones_clinicas_psicoeducativas.jpg?raw=true'}
+          image={`${process.env.NEXT_PUBLIC_BASE_IMG}intervenciones_clinicas_psicoeducativas.jpg${process.env.NEXT_PUBLIC_KEY_IMG}`}
           left={false}
           bgColor={'#f1f1f1'}
         >

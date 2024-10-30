@@ -74,7 +74,7 @@ export const blogs = [
 <li>Moreno, P., & Martín, J. C. (2004). <em>Dominar las crisis de ansiedad</em>. Desclée De Brouwer.</li>
 </ul>
 `,
-    imagen: `${process.env.NEXT_PUBLIC_BASE_IMG}ansiedad01.jpg${process.env.NEXT_PUBLIC_KEY_IMG}`,
+    imagen: `ansiedad01.jpg`,
     // video: 'https://www.youtube.com/embed/SsICv9BGemc?si=J6EOYsvxBxWB1cEw',
     downloads: [
       {
@@ -125,19 +125,19 @@ export const blogs = [
 <li>DSME. (2024). <em>Manual de prevención del suicidio</em>. Dirección de Asuntos Estudiantiles, Universidad Diego Portales.</li>
 </ul>
 `,
-    imagen: `${process.env.NEXT_PUBLIC_BASE_IMG}suicidio01.jpg${process.env.NEXT_PUBLIC_KEY_IMG}`,
+    imagen: `suicidio01.jpg`,
     video: '',
     // video: 'https://www.youtube.com/embed/tskcTOc7k58?si=oiNvP0nMIdI084cb',
     downloads: [
       {
-        titulo: 'Estrategias de intervención para la prevención del suicidio ',
+        titulo: 'Estrategias de intervención para la prevención del suicidio',
         bajada: 'Explora estrategias efectivas de intervención para prevenir el suicidio, incluyendo cómo hablar abiertamente, escuchar con empatía y proporcionar apoyo adecuado.',
         url: 'https://reposaludmental.blob.core.windows.net/publicsite/02%20Suicidio%20c%C3%B3mo%20buscar%20ayuda%20y%20ayudar/descargables/Estrategias%20de%20intervenci%C3%B3n%20para%20la%20prevenci%C3%B3n%20del%20suicidio.pdf?sp=rl&st=2024-10-02T00:13:39Z&se=2099-10-02T08:13:39Z&spr=https&sv=2022-11-02&sr=c&sig=GotHrZkZjeRQpnGTT1OxRvuCvwqj%2BJSQkS7Tn5yz8qk%3D'
       },
       {
         titulo: 'Prevención del suicidio ¿Cómo identificar señales de alerta?',
         bajada: 'Aprende a identificar señales de alerta y prevenir el suicidio con estrategias efectivas y un enfoque integral de apoyo.',
-        url: 'prevencion_del_suicidio.pdf'
+        url: '/prevencion_del_suicidio.pdf'
       }
     ]
   },
@@ -174,28 +174,21 @@ export const blogs = [
 <li>Liu, X.-Q., Guo, Y.-X., & Wang, X. (2023). Delivering substance use prevention interventions for adolescents in educational settings: A scoping review. World Journal of Psychiatry, 13(7), 409-422.</li>
 </ul>
     `,
-    imagen: `${process.env.NEXT_PUBLIC_BASE_IMG}drogas02.jpg${process.env.NEXT_PUBLIC_KEY_IMG}`,
+    imagen: `drogas02.jpg`,
     video: '',
     // video: 'https://www.youtube.com/embed/SsICv9BGemc?si=J6EOYsvxBxWB1cEw',
     downloads: [
       {
         titulo: 'Alcohol y drogas: ¿cómo evito los excesos?',
         bajada: 'Descubre estrategias eficaces para evitar el consumo excesivo de alcohol y drogas, fomentando un ambiente universitario saludable y seguro.',
-        url: 'alcohol_y_drogas.pdf'
+        url: '/alcohol_y_drogas.pdf'
       },
       {
         titulo: 'Señales de riesgo en mi consumo de alcohol y drogas',
         bajada: 'Identifica las señales de riesgo en tu consumo de alcohol y drogas para tomar acción temprana y proteger tu bienestar general.',
         url: 'https://reposaludmental.blob.core.windows.net/publicsite/03%20Drogas%20y%20alcohol%20c%C3%B3mo%20evitar%20el%20exceso/descargables/Señales%20de%20riesgo%20en%20mi%20consumo%20de%20alcohol%20y%20drogas.pdf?sp=rl&st=2024-10-02T00:13:39Z&se=2099-10-02T08:13:39Z&spr=https&sv=2022-11-02&sr=c&sig=GotHrZkZjeRQpnGTT1OxRvuCvwqj%2BJSQkS7Tn5yz8qk%3D'
       }
-      /* 
-
-      Alcohol y drogas: ¿cómo evito los excesos?.pdf
-
-      https://reposaludmental.blob.core.windows.net/publicsite/03%20Drogas%20y%20alcohol%20c%C3%B3mo%20evitar%20el%20exceso/descargables/Alcohol%20y%20drogas%3A%20%C2%BFc%C3%B3mo%20evito%20los%20excesos?.pdf?sp=rl&st=2024-10-02T00:13:39Z&se=2099-10-02T08:13:39Z&spr=https&sv=2022-11-02&sr=c&sig=GotHrZkZjeRQpnGTT1OxRvuCvwqj%2BJSQkS7Tn5yz8qk%3D
-      
-      
-      */
+   
     ]
   },
   {
@@ -248,42 +241,22 @@ export const blogs = [
 <p>Los primeros días en la universidad pueden ser desafiantes, pero con una buena organización, actitud positiva y el apoyo de tus seres queridos y compañeros, podrás superar cualquier obstáculo. Recuerda que la universidad es una oportunidad para crecer tanto académica como personalmente. No te preocupes si las cosas no salen perfectas al principio; lo importante es aprender de cada experiencia y seguir adelante. ¡Ánimo y éxito en esta nueva etapa de tu vida!</p>
 
 `,
-    imagen: `/primeros_dias_01.jpg`,
-    // imagen: `${process.env.NEXT_PUBLIC_BASE_IMG}iStock-1479946769_arriba.jpg${process.env.NEXT_PUBLIC_KEY_IMG}`,
-
+    imagen: `primeros_dias_01.jpg`,
     video: '',
     // video: 'https://www.youtube.com/embed/SsICv9BGemc?si=J6EOYsvxBxWB1cEw',
     downloads: [
       {
         titulo: 'Construye tu plan de adaptación universitario',
         bajada: 'Desarrolla un plan integral para adaptarte a la vida universitaria, equilibrando lo académico, social y personal.',
-        url: 'construye_tu_plan_de_adaptacion.pdf'
+        url: '/construye_tu_plan_de_adaptacion.pdf'
       },
       {
         titulo: 'Tips para mi adaptación universitaria',
         bajada: 'Consejos prácticos para gestionar el tiempo, construir redes y cuidar tu bienestar en tu adaptación universitaria.',
-        url: 'tips_para_mi_adaptacion_universitaria.pdf'
+        url: '/tips_para_mi_adaptacion_universitaria.pdf'
       }
-
-      /* 
-      
-
-      05 ¿Primeros días en la U? Tips útiles/
-      construye tu plan de adaptación.pdf
-      Tips para mi adaptación universitaria.pdf
-
-      https://reposaludmental.blob.core.windows.net/publicsite/05 ¿Primeros días en la U? Tips útiles/construye tu plan de adaptación.pdf?sp=rl&st=2024-10-02T00:13:39Z&se=2099-10-02T08:13:39Z&spr=https&sv=2022-11-02&sr=c&sig=GotHrZkZjeRQpnGTT1OxRvuCvwqj%2BJSQkS7Tn5yz8qk%3D
-
-      https://reposaludmental.blob.core.windows.net/publicsite/05%20%3FPrimeros%20d%C3%ADas%20en%20la%20U%3F%20Tips%20%C3%BAtiles/construye%20tu%20plan%20de%20adaptaci%C3%B3n.pdf?sp=rl&st=2024-10-02T00:13:39Z&se=2099-10-02T08:13:39Z&spr=https&sv=2022-11-02&sr=c&sig=GotHrZkZjeRQpnGTT1OxRvuCvwqj%2BJSQkS7Tn5yz8qk%3D
-
-      https://reposaludmental.blob.core.windows.net/publicsite/05 ¿Primeros días en la U? Tips útiles/Tips para mi adaptación universitaria.pdf?sp=rl&st=2024-10-02T00:13:39Z&se=2099-10-02T08:13:39Z&spr=https&sv=2022-11-02&sr=c&sig=GotHrZkZjeRQpnGTT1OxRvuCvwqj%2BJSQkS7Tn5yz8qk%3D
-
-      https://reposaludmental.blob.core.windows.net/publicsite/05%20%3FPrimeros%20d%C3%ADas%20en%20la%20U%3F%20Tips%20%C3%BAtiles/Tips%20para%20mi%20adaptaci%C3%B3n%20universitaria.pdf?sp=rl&st=2024-10-02T00:13:39Z&se=2099-10-02T08:13:39Z&spr=https&sv=2022-11-02&sr=c&sig=GotHrZkZjeRQpnGTT1OxRvuCvwqj%2BJSQkS7Tn5yz8qk%
-
-      */
     ]
   },
-
 ]
 
 

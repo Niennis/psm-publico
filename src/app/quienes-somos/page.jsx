@@ -5,34 +5,35 @@ import { useMediaQuery } from "@mui/material";
 import { Card, CardMedia, Typography } from "@mui/material";
 import { } from "@/components/imagepath";
 import ReserveBtn from "@/components/ReserveBtn";
-import Elevation from "@/components/HowTo"
+import StepList from "@/components/StepList"
 
 export default function QuienesSomos() {
-  const matches = useMediaQuery('(min-width:600px)');
+  const isMediumSize = useMediaQuery('(min-width:768px)');
+  const isLargeSize = useMediaQuery('(min-width:1024px)');
 
   return (
-    <div className="row prevencion flex-column d-flex" style={{ padding:0, margin: 0 }}>
-      <div className="col-12" style={{ padding:0, margin: 0 }}>
+    <div className="row prevencion flex-column d-flex m-0" style={{ padding: 0, margin: 0 }}>
+      <div className="col-12" style={{ padding: 0, margin: 0 }}>
         <div className="card quienes-somos"
           style={{
-            padding: matches ? '0px 96px' : '0px 32px',
+            padding: isMediumSize ? '0px 96px' : '0px 32px',
             margin: '0px',
             border: 'none',
           }}>
           <div className="card-body" style={{ padding: '0px', margin: '0px' }}>
-            <h3 className={matches ? "blog-title" : "blog-title-sm"} style={{ marginTop: !matches && '120px', fontSize: '48px', lineHeight: '60px', fontWeight: 700, textWrap: 'balance' }}>
+            <h3 className={isMediumSize ? "blog-title" : "blog-title-sm"} style={{ marginTop: !isMediumSize && '120px', fontSize: '48px', lineHeight: '60px', fontWeight: 700, textWrap: 'balance' }}>
               Dirección de Salud Mental de Estudiantes
             </h3>
 
           </div>
           <h2
             className="sailec"
-            style={{ fontWeight: 700, fontSize: '32px', lineHeight: '40px', marginTop: matches ? '20px' : '40px' }}>
+            style={{ fontWeight: 700, fontSize: '32px', lineHeight: '40px', marginTop: isMediumSize ? '20px' : '40px' }}>
             ¿Qué es el DSME?
           </h2>
           <div className="row"  >
             {
-              matches
+              isLargeSize
                 ?
                 <div
                   className={`container col-12  d-flex  justify-content-center`}
@@ -69,7 +70,7 @@ export default function QuienesSomos() {
                     sx={{
                       boxShadow: 0,
                       display: 'inline-block',
-                      height: matches ? "100%" : "fit-content",
+                      height: isMediumSize ? "100%" : "fit-content",
                       display: 'flex',
                       flexDirection: 'column',
                       justifyContent: 'space-between',
@@ -104,7 +105,7 @@ export default function QuienesSomos() {
                 </div>
                 :
                 <div
-                  className={`container col-12 ${matches ? 'd-flex' : ''} justify-content-center`}
+                  className={`container col-12 ${isMediumSize ? 'd-flex' : ''} justify-content-center`}
                   style={{
                     fontSize: '16px',
                     fontWeight: 400,
@@ -131,15 +132,15 @@ export default function QuienesSomos() {
                 </div>
             }
           </div>
-          <div className="row" style={{ margin: matches ? '0' : 0 }} >
+          <div className="row" style={{ margin: isMediumSize ? '0' : 0 }} >
             <div className="card-body flex-column d-flex my-3 " style={{ padding: 0 }} >
               {
-                matches
+                isMediumSize
                   ?
                   <>
                     <h2
                       className="sailec"
-                      style={{ fontWeight: 700, fontSize: '32px', lineHeight: '40px', marginTop: matches ? '20px' : '90px' }}>¿Cómo puedo solicitar atención en el DSME?
+                      style={{ fontWeight: 700, fontSize: '32px', lineHeight: '40px', marginTop: isMediumSize ? '20px' : '90px' }}>¿Cómo puedo solicitar atención en el DSME?
                     </h2>
                   </>
                   :
@@ -159,17 +160,17 @@ export default function QuienesSomos() {
                 }}>Primero, debes saber que <strong>pedir ayuda no es un signo de debilidad ni un acto egoísta. Sino, todo lo contrario. Pedir ayuda es un acto de valentía y amor propio</strong>. Y para iniciar ese proceso, es importante saber dos cosas: <strong>¿Cuándo y donde pedir ayuda?</strong>
               </Typography>
 
-              <Elevation matches={matches} />
+              <StepList isMediumSize={isMediumSize} />
             </div>
-            <div className="card-body flex-column d-flex align-items-center my-2 ">
+            <div className="card-body flex-column d-flex align-items-center ">
               <ReserveBtn text={'Reservar'} bgColor={'#FABB00'} color={'#000'} />
             </div>
 
             <div className="card-body flex-column d-flex align-items-center px-0">
-              <h2 className="sailec" style={{ fontWeight: 700, fontSize: '32px', lineHeight: '40px', marginTop: matches ? '20px' : '20px' }}>¿Tienes preguntas o sugerencias?</h2>
+              <h2 className="sailec" style={{ fontWeight: 700, fontSize: '32px', lineHeight: '40px', marginTop: isMediumSize ? '20px' : '20px' }}>¿Tienes preguntas o sugerencias?</h2>
               <p style={{
-                margin: matches ? '0 25px' : 0,
-                textAlign: matches ? 'center' : 'left',
+                margin: isMediumSize ? '0 25px' : 0,
+                textAlign: isMediumSize ? 'center' : 'left',
                 fontSize: '20px',
                 fontWeight: 400,
                 lineHeight: '32px',
@@ -187,7 +188,7 @@ export default function QuienesSomos() {
           <div className="row" style={{ margin: '0 ' }} >
             <div className="card-body flex-column d-flex align-items-center px-0">
               {
-                matches
+                isMediumSize
                   ? <h2 style={{ fontWeight: 700, fontSize: '32px', lineHeight: '40px', marginTop: '20px' }} className="sailec">¿Dónde se encuentra el <strong>DSME?</strong></h2>
                   : <>
                     <h2 style={{ fontWeight: 700, fontSize: '32px', lineHeight: '40px' }} className="sailec">¿Dónde se encuentra el <strong>DSME?</strong></h2>
@@ -196,7 +197,15 @@ export default function QuienesSomos() {
               }
               <div className="col-12 col-lg-6 d-flex justify-content-center mb-3">
                 <a href="https://maps.app.goo.gl/MgPjwoqPatGxty8W8" target="_blank">
-                  <img src={map.src} alt="Mapa ubicación Universidad" width={matches ? 800 : '100%'} />
+                  <Image
+                    src={map.src}
+                    alt="Mapa ubicación Universidad"
+                    height={0}
+                    width={0}
+                    // fill // Reemplaza layout="fill" en Next.js 14
+                    sizes="100%" // Ajusta el tamaño de la imagen según el viewport
+                    style={{ objectFit: 'cover', borderRadius: '8px', width: isLargeSize ? '800px' : '100%', height: '400px' }} // Similar a cómo se usa en CardMedia
+                  />
                 </a>
               </div>
             </div>

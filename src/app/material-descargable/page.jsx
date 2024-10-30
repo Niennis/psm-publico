@@ -1,14 +1,13 @@
 'use client'
-import FlipCard from "@/components/FlipCard";
-import ImageSlider from "@/components/ImageSlider";
-import { blogs } from "@/utils/blogs";
-import { useRouter } from "next/navigation";
-import { useMediaQuery } from "@mui/material";
-import { FaArrowLeft } from "react-icons/fa";
-import FooterDae from "@/components/Footer";
-import SimpleBackdrop from "@/components/Backdrop";
-import { saludMental03 } from "@/components/imagepath";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+
+import FooterDae from "@/components/Footer";
+import { blogs } from "@/utils/blogs";
+
+import { useMediaQuery } from "@mui/material";
+
+import { FaArrowLeft } from "react-icons/fa";
 import Accordion from '@mui/material/Accordion';
 import AccordionActions from '@mui/material/AccordionActions';
 import AccordionSummary from '@mui/material/AccordionSummary';
@@ -16,6 +15,9 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Button from '@mui/material/Button';
 import { FaDownload } from "react-icons/fa";
+
+import SimpleBackdrop from "@/components/Backdrop";
+import { saludMental03 } from "@/components/imagepath";
 
 const material_descargable = [
   {
@@ -69,28 +71,28 @@ const material_descargable = [
     archivo: 'https://drive.google.com/file/d/1Ns-c8pRyu1bsgWvNXWB9sdBEo-IX5E5B/view'
   },
 ]
-const ordenarPorTitulo = (array) =>
+const sortedByTitulo = (array) =>
   array.sort((a, b) => a.titulo.localeCompare(b.titulo, 'es', { sensitivity: 'base' }));
 
 const downloadsArray = blogs.flatMap(item => item.downloads);
-const materialOrdenado = ordenarPorTitulo(downloadsArray);
+const orderedResources = sortedByTitulo(downloadsArray);
 
-const dividirArrayPorPosiciones = (array) => {
-  return array.reduce((result, elemento, indice) => {
-    result[indice % 2].push(elemento);
+const splitArrayByPositions = (array) => {
+  return array.reduce((result, element, index) => {
+    result[index % 2].push(element);
     return result;
   }, [[], []]);
 }
 
-const [pares, impares] = dividirArrayPorPosiciones(materialOrdenado);
+const [even, odd] = splitArrayByPositions(orderedResources);
 
 export default function MaterialDescargable() {
-  const matches = useMediaQuery('(min-width:600px)');
+  const isMediumSize = useMediaQuery('(min-width:768px)');
   const router = useRouter()
 
   return (
     <>
-      {matches && <div style={{
+      {isMediumSize && <div style={{
         height: '620px',
         overflow: 'hidden',
         position: 'relative'
@@ -113,9 +115,9 @@ export default function MaterialDescargable() {
       </div>
       }
       <div className="row flex-column d-flex  sailec" style={{ margin: 0, padding: 0 }}>
-        <div className="col-12" style={{ padding: matches ? '0 96px 20px' : '98px 32px 20px' }}>
+        <div className="col-12" style={{ padding: isMediumSize ? '0 96px 20px' : '98px 32px 20px' }}>
           <div>
-            {matches &&
+            {isMediumSize &&
               <button className='btn mt-4 mb-5'
                 style={{
                   border: '1px solid #A6A6A6',
@@ -130,20 +132,20 @@ export default function MaterialDescargable() {
               </button>
             }
             <div className="card-body flex-row d-flex">
-              <h2 className={matches ? 'blog-title' : 'blog-title-sm'}>
+              <h2 className={isMediumSize ? 'blog-title' : 'blog-title-sm'}>
                 Material descargable
               </h2>
             </div>
 
-            <div className={`card-body flex-md-column flex-lg-row d-flex  ${matches ? 'blog-text' : 'blog-text-sm'}`} >
+            <div className={`card-body flex-md-column flex-lg-row d-flex  ${isMediumSize ? 'blog-text' : 'blog-text-sm'}`} >
               <p>
                 El Departamento de Salud Mental Estudiantil de UDP (DSME) está constantemente elaborando material para poder prevenir y promocionar el bienestar integral de la comunidad educativa. A continuación, te dejamos algunos documentos que pueden servirte a ti o a alguien que conoces.
               </p>
             </div>
 
             <div className="row" style={{ margin: 0 }}>
-              <div className="col-12 col-lg-6 card-body flex-column d-flex justify-content-start  align-items-center" style={{ gap: '20px', width: matches ? '45%' : '', marginRight: matches ? '10px' : 'auto' }}>
-                {pares.map(item => (
+              <div className="col-12 col-lg-6 card-body flex-column d-flex justify-content-start  align-items-center" style={{ gap: '20px', width: isMediumSize ? '45%' : '', marginRight: isMediumSize ? '10px' : 'auto' }}>
+                {even.map(item => (
                   <div className="col-12" key={item.titulo}>
                     <Accordion>
                       <AccordionSummary
@@ -170,8 +172,8 @@ export default function MaterialDescargable() {
                 ))}
               </div>
 
-              <div className="col-12 col-lg-6 card-body flex-column d-flex  justify-content-start align-items-center" style={{ gap: '20px', width: matches ? '45%' : '', marginLeft: matches ? '10px' : 'auto', marginTop: matches ? '' : '20px' }}>
-                {impares.map(item => (
+              <div className="col-12 col-lg-6 card-body flex-column d-flex  justify-content-start align-items-center" style={{ gap: '20px', width: isMediumSize ? '45%' : '', marginLeft: isMediumSize ? '10px' : 'auto', marginTop: isMediumSize ? '' : '20px' }}>
+                {odd.map(item => (
                   <div className="col-12" key={item.titulo}>
                     <Accordion>
                       <AccordionSummary
@@ -197,13 +199,11 @@ export default function MaterialDescargable() {
                   </div>
                 ))}
               </div>
-
-
             </div>
           </div>
         </div>
       </div>
-      <FooterDae matches={matches} />
+      <FooterDae isMediumSize={isMediumSize} />
     </>
 
   );

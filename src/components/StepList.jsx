@@ -13,12 +13,12 @@ const Item = styled(Paper)(({ theme }) => ({
 
 const lightTheme = createTheme({ palette: { mode: 'light' } });
 
-export default function Elevation({ matches }) {
+export default function StepList({ matches }) {
   return (
     <>
       <Grid container spacing={2} sx={{ width: '100%', placeContent: 'center', margin: matches ? '' : '10px auto' }} >
         {[lightTheme].map((theme, index) => (
-          <Grid item xs={12} sm={6} key={index} className='px-0'>
+          <Grid item xs={12} md={10} sm={8} key={index} className='px-0'>
             <ThemeProvider theme={theme}>
               <Box
                 className='quienes-somos-list'
@@ -33,14 +33,14 @@ export default function Elevation({ matches }) {
                 <ol style={{ paddingLeft: '0px' }}>
 
                   {[
-                    { elevation: 0, title: 'Si necesitas algún servicio del departamento debes tomar hora' },
-                    { elevation: 1, title: 'Ingresas al sitio dando click en Reservar' },
-                    { elevation: 2, title: 'Tendrás que completar un formulario con tus datos' },
-                    { elevation: 3, title: 'Podrás agendar entrevista en los horarios disponibles' },
-                    { elevation: 4, title: 'Debes confirmar la cita' },
-                    { elevation: 6, title: 'Luego de la entrevista, el profesional determinará qué dispositivo es el que calza mejor con tus necesidades y agendará tus siguientes citas' }
+                    { id: 0, title: 'Si necesitas algún servicio del departamento debes tomar hora' },
+                    { id: 1, title: 'Ingresas al sitio dando click en Reservar' },
+                    { id: 2, title: 'Tendrás que completar un formulario con tus datos' },
+                    { id: 3, title: 'Podrás agendar entrevista en los horarios disponibles' },
+                    { id: 4, title: 'Debes confirmar la cita' },
+                    { id: 6, title: 'Luego de la entrevista, el profesional determinará qué dispositivo es el que calza mejor con tus necesidades y agendará tus siguientes citas' }
                   ].map((item) => (
-                      <Item key={item.elevation} item={item.elevation}
+                      <Item key={item.id} item={item.id}
                         sx={{
                           height: 'fit-content',
                           padding: '20px',
