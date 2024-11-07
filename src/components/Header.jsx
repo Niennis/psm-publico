@@ -58,7 +58,7 @@ const Header = () => {
   const pages = EVENTS !== 0 ? pagesWithEvents : pagesWithoutEvents
   const [style, setStyle] = useState({ width: 'min-content' });
 
-  const BOTON_RESERVAR = process.env.NEXT_PUBLIC_ACTIVATE_BUTTON === "true"
+  const BOTON_RESERVAR = process.env.NEXT_PUBLIC_ACTIVATE_BUTTON === true
   console.log('BOTON', BOTON_RESERVAR)
 
   const isMediumSize = useMediaQuery("(min-width : 641px) and (max-width : 768px)");
