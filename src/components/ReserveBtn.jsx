@@ -13,20 +13,26 @@ const ReserveBtn = ({ text, bgColor, color }) => {
   // const handleClose = () => setOpen(false);
   const matches = useMediaQuery('(min-width:600px)');
 
-
   return (
     <>
-      <Link href="#" className="sailec-medium" style={{cursor: 'not-allowed'}}>
+      <Link href="https://psm-opal.vercel.app/#estudiantes" >
         <button
-          className='btn btn-rounded btn-reservar'
+          className=' btn-reservar ui-large btn-shadow desktop-container '
           style={{
-            width: matches ? '130px' : '100px',
-            height: matches ? '56px' : '40px',
             backgroundColor: bgColor,
             color: color,
-            fontSize: matches ? '16px' : '14px',
-            fontWeight: 700,
-            cursor: 'not-allowed'
+          }}
+        // onClick={handleOpen}
+        >
+          <Today style={{ margin: matches ? '-2px 4px 0 0' : '-3px 0 0', fontSize: '15px' }} />
+          {text}
+        </button>
+
+        <button
+          className=' btn-reservar-mobile lato-btn btn-shadow mobile-container'
+          style={{
+            backgroundColor: bgColor,
+            color: color,
           }}
         // onClick={handleOpen}
         >

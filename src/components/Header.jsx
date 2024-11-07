@@ -5,7 +5,6 @@ import { useState, useEffect } from "react";
 import { useSection } from "@/context/SectionContext";
 import ReserveBtn from "./ReserveBtn";
 import Link from "next/link";
-import { logo } from "./imagepath";
 import { useMediaQuery } from "@mui/material";
 import { Tooltip, Avatar } from '@mui/material';
 
@@ -16,18 +15,18 @@ import { FaChevronDown } from "react-icons/fa";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 const pagesWithEvents = [
+  { title: 'QUIÉNES SOMOS', url: '/quienes-somos', label: 'quienes-somos' },
   { title: 'TEST AUTODIAGNÓSTICO?', url: '/#test_autodiagnostico', label: 'test_autodiagnostico' },
   { title: 'EVENTOS', url: '/#eventos', label: 'eventos' },
   { title: 'PREGUNTAS FRECUENTES', url: '/#preguntas-frecuentes', label: 'preguntas-frecuentes' },
   { title: 'MATERIAL DESCARGABLE', url: '/material-descargable', label: 'material-descargable' },
-  { title: 'QUIÉNES SOMOS', url: '/quienes-somos', label: 'quienes-somos' },
 ];
 
 const pagesWithoutEvents = [
+  { title: 'QUIÉNES SOMOS', url: '/quienes-somos', label: 'quienes-somos' },
   { title: 'TEST AUTODIAGNÓSTICO', url: '/#test_autodiagnostico', label: 'test_autodiagnostico' },
   { title: 'PREGUNTAS FRECUENTES', url: '/#preguntas-frecuentes', label: 'preguntas-frecuentes' },
   { title: 'MATERIAL DESCARGABLE', url: '/material-descargable', label: 'material-descargable' },
-  { title: 'QUIÉNES SOMOS', url: '/quienes-somos', label: 'quienes-somos' },
 ];
 
 const subMenu = [
@@ -63,7 +62,8 @@ const Header = () => {
 
   const isMediumSize = useMediaQuery("(min-width : 641px) and (max-width : 768px)");
   const isLargeSize = useMediaQuery("(min-width : 769px)");
-  
+  const isExtaLargeSize = useMediaQuery("(min-width: 1025px)");
+
   useEffect(() => {
     const handleResize = () => {
       const width = window.innerWidth;
@@ -110,22 +110,22 @@ const Header = () => {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
     setActiveSection(id);
   };
-// Controla el padding del body al abrir/cerrar el menú
-useEffect(() => {
-  if (anchorElNav) {
-    document.body.style.paddingRight = '0px';
-    const header = document.querySelector('header');
-    if (header) {
-      header.style.paddingRight = '0px';
+  // Controla el padding del body al abrir/cerrar el menú
+  useEffect(() => {
+    if (anchorElNav) {
+      document.body.style.paddingRight = '0px';
+      const header = document.querySelector('header');
+      if (header) {
+        header.style.paddingRight = '0px';
+      }
+    } else {
+      document.body.style.paddingRight = '';
+      const header = document.querySelector('header');
+      if (header) {
+        header.style.paddingRight = '';
+      }
     }
-  } else {
-    document.body.style.paddingRight = '';
-    const header = document.querySelector('header');
-    if (header) {
-      header.style.paddingRight = '';
-    }
-  }
-}, [anchorElNav]);
+  }, [anchorElNav]);
 
   return (
     <ThemeProvider theme={theme}>
@@ -152,15 +152,6 @@ useEffect(() => {
                   noWrap
                   component="a"
                   href="/"
-                  sx={{
-                    mr: 2,
-                    display: { xs: 'none', sm: 'none',  md: 'flex' },
-                    fontWeight: 700,
-                    letterSpacing: '.3rem',
-                    color: 'inherit',
-                    textDecoration: 'none',
-                    fontFamily: 'sailec'
-                  }}
                 >
                   <Image
                     alt="Logo"
@@ -181,13 +172,13 @@ useEffect(() => {
                     return (
                       <Link style={{ color: 'black', textDecoration: 'none' }} href={page.url} key={page.title} >
                         <Button
-                          className={`sailec ${activeSection === page.label
+                          className={`${isExtaLargeSize ? "ui-medium" : "ui-small"} ${activeSection === page.label
                             ? 'active-header'
                             : ''
                             }`}
 
                           onClick={() => handleNavClick(page.label)}
-                          sx={{ ...style, fontFamily: 'sailecmedium', my: 2, color: 'black', display: 'block' }}
+                          sx={{ ...style, m: 2, color: 'black', display: 'block', width: 'min-content' }}
                         >
                           {page.title}
                         </Button>
@@ -197,16 +188,17 @@ useEffect(() => {
                   )}
                   <Tooltip title="Como trabajamos">
                     <Button
-                      className={`sailec ${activeSection === 'como_trabajamos'
+                      className={`${isExtaLargeSize ? "ui-medium" : "ui-small"} ${activeSection === 'como_trabajamos'
                         ? 'active-header'
                         : ''
                         }`}
-                      onClick={handleOpenUserMenu} sx={{ ...style, p: 0, m: '0 15px 0 0', fontFamily: 'sailecmedium', color: 'black', marginTop: '16px', marginBottom: '16px' }}>
+                      onMouseOver={handleOpenUserMenu} sx={{ ...style, p: 0, m: 2, width: 'min-content', color: 'black', marginTop: '16px', marginBottom: '16px' }}
+                    >
                       CÓMO TRABAJAMOS
                     </Button>
                   </Tooltip>
 
-                  <Box sx={{ flexGrow: 0 }} className={`sailec `}>
+                  <Box sx={{ flexGrow: 0 }} className="ui-medium">
                     <Menu
                       sx={{ mt: '45px' }}
                       id="menu-appbar"
@@ -222,11 +214,12 @@ useEffect(() => {
                       }}
                       open={Boolean(anchorElUser)}
                       onClose={handleCloseUserMenu}
+                      onMouseLeave={handleCloseUserMenu}
                     >
                       {subMenu.map((setting) => (
                         <MenuItem key={setting.url} onClick={handleCloseUserMenu}>
-                          <Typography textAlign="center" className="sailec">
-                            <a href={setting.url} style={{ color: 'black', fontFamily: 'sailec', textDecoration: 'none' }}>
+                          <Typography textAlign="center" className="ui-medium">
+                            <a href={setting.url} style={{ color: 'black', textDecoration: 'none' }}>
                               {setting.title}
                             </a>
                           </Typography>
@@ -235,12 +228,23 @@ useEffect(() => {
                     </Menu>
                   </Box>
                 </Box>
+                {
+                  BOTON_RESERVAR ?
+                    <Box sx={{ flexGrow: 0, display: 'flex', alignItems: 'center' }}>
+                      <ReserveBtn text={'Reservar'} bgColor={'#FABB00'} color={'#000'} />
+                      <Link href="https://psm-opal.vercel.app/#profesionales" style={{ textDecoration: 'none', }} >
+                        <FaUserCircle className={`btn-fa-user btn-fa-user-desktop`} />
+                      </Link>
+                    </Box>
+                    : ''
+                }
               </>
             ) : (
               <>
                 {/*  MENU MOBILE */}
-                <Box sx={{ flexGrow: 1, display: { xs: 'flex', sm: 'flex', md: 'none' } }}>
+                <Box sx={{ flexGrow: 1, display: { xs: 'flex', sm: 'flex', md: 'none' }, justifyContent: 'space-between' }}>
                   <IconButton
+                    className="collapsable-menu"
                     size="large"
                     aria-label="account of current user"
                     aria-controls="menu-appbar"
@@ -271,8 +275,8 @@ useEffect(() => {
                     {
                       pages.map((page) => (
                         <MenuItem key={page.title} onClick={handleCloseNavMenu}>
-                          <Typography textAlign="center" className="sailec">
-                            <a href={page.url} style={{ color: 'black', fontFamily: 'sailec' }}>
+                          <Typography textAlign="center" className="ui-medium">
+                            <a href={page.url} style={{ color: 'black', }}>
                               {page.title}
                             </a>
                           </Typography>
@@ -280,14 +284,14 @@ useEffect(() => {
                       ))
                     }
                     <MenuItem onClick={handleOpenUserMenu}>
-                      <Typography textAlign="center" className="sailec" sx={{ color: '#000000', fontFamily: 'sailec' }}>
+                      <Typography textAlign="center" className="ui-medium font-black" >
                         CÓMO TRABAJAMOS <FaChevronDown />
                       </Typography>
                     </MenuItem>
 
-                    <Box sx={{ flexGrow: 0 }} className={`sailec `}>
+                    <Box sx={{ flexGrow: 0 }} >
                       <Menu
-                        sx={{ mt: '45px' }}
+                        sx={{ mt: '45px', }}
                         id="menu-appbar"
                         anchorEl={anchorElUser}
                         anchorOrigin={{
@@ -304,8 +308,8 @@ useEffect(() => {
                       >
                         {subMenu.map((setting) => (
                           <MenuItem key={setting.url} onClick={handleCloseUserMenu}>
-                            <Typography textAlign="center" className="sailec">
-                              <a href={setting.url} style={{ color: 'black', fontFamily: 'sailec', textDecoration: 'none' }}>
+                            <Typography textAlign="center" className="ui-medium">
+                              <a href={setting.url} style={{ color: 'black', textDecoration: 'none' }}>
                                 {setting.title}
                               </a>
                             </Typography>
@@ -323,17 +327,12 @@ useEffect(() => {
                   sx={{
                     mr: { xs: 0, lg: 2 },
                     display: { xs: 'flex', lg: 'none' },
-                    flexGrow: 1,
-                    fontFamily: 'monospace',
-                    fontWeight: 700,
-                    letterSpacing: '.3rem',
+                    /* flexGrow: 1, temporal mientras botones están desactivados */
                     color: 'inherit',
-                    textDecoration: 'none',
-                    fontFamily: 'sailec',
                   }}
                 >
                   <Image
-                    src={'https://github.com/Niennis/imagesudp/blob/main/UDP_Logo_small.png?raw=true'}
+                    src={`${process.env.NEXT_PUBLIC_BASE_IMG}UDP_Logo_small.png${process.env.NEXT_PUBLIC_KEY_IMG}`}
                     height={0}
                     width={0}
                     alt="logo udp"
@@ -343,21 +342,28 @@ useEffect(() => {
                       width: '100px',
                     }} />{" "}
                 </Typography>
-
+                {
+                  BOTON_RESERVAR ?
+                    <Box sx={{ flexGrow: 0, display: 'flex', alignItems: 'center' }}>
+                      <ReserveBtn text={'Reservar'} bgColor={'#FABB00'} color={'#000'} />
+                      <Link href="https://psm-opal.vercel.app/#profesionales" style={{ textDecoration: 'none', }} >
+                        <FaUserCircle className={`btn-fa-user  btn-fa-user-mobile`} />
+                      </Link>
+                    </Box>
+                    : ''
+                }
               </>
             )}
-
-            {
+            {/* {
               BOTON_RESERVAR ?
-                <Box sx={{ flexGrow: 0 }}>
+                <Box sx={{ flexGrow: 0, display: 'flex', alignItems: 'center' }}>
                   <ReserveBtn text={'Reservar'} bgColor={'#FABB00'} color={'#000'} />
-                  <Link href="#" style={{ textDecoration: 'none', cursor: 'not-allowed' }} >
-                    <FaUserCircle style={{ fontSize: isMediumSize ? '50px' : '38px', color: '#000', border: '1px solid #ff5253', borderRadius: '50px', padding: '5px', marginLeft: '5px', background: '#b82925', color: '#fff', fontFamily: 'sailec' }} />
+                  <Link href="https://psm-opal.vercel.app/#profesionales" style={{ textDecoration: 'none',}} >
+                    <FaUserCircle className={`btn-fa-user ${isMediumSize ? "btn-fa-user-mobile" : "btn-fa-user-desktop"}`} />
                   </Link>
                 </Box>
                 : ''
-            }
-
+            } */}
           </Toolbar>
         </Container>
       </AppBar >

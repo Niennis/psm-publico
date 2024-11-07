@@ -5,7 +5,7 @@ import FrequentAskedQuestions from "@/components/FAQ";
 import { useMediaQuery } from "@mui/material";
 
 const ConveniosYProfesionales = () => {
-  const matches = useMediaQuery('(min-width:600px)');
+  const isMediaSize = useMediaQuery('(min-width:768px)');
   const [activeTab, setActiveTab] = useState('descripcion-general');
 
   const handleTabClick = (tabId) => {
@@ -15,9 +15,9 @@ const ConveniosYProfesionales = () => {
 
     <div className="row prevencion flex-column d-flex m-0" >
       <div className="col-12" >
-        <div className="card quienes-somos" style={{ padding: matches ? '0px 96px' : '120px 24px 0px', margin: '0px', border: 'none' }}>
+        <div className="card quienes-somos" style={{ padding: isMediaSize ? '0px 96px' : '120px 24px 0px', margin: '0px', border: 'none' }}>
           <div className="card-body" style={{ padding: '0px', margin: '0px' }}>
-          <h3 className={matches ? "blog-title" : "blog-title-sm"} style={{ marginTop: !matches && '20px', fontSize: matches ? '48px' : '36px', lineHeight: matches ? '60px': '46px', fontWeight: 700, textWrap: 'balance' }}>
+          <h3 className={isMediaSize ? "blog-title" : "blog-title-sm"} style={{ marginTop: !isMediaSize && '20px', fontSize: isMediaSize ? '48px' : '36px', lineHeight: isMediaSize ? '60px': '46px', fontWeight: 700, textWrap: 'balance' }}>
             Convenios y Profesionales recomendados
             </h3>
             <div className="tab-content tab-dsme-content">

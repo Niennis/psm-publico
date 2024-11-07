@@ -17,7 +17,6 @@ import Button from '@mui/material/Button';
 import { FaDownload } from "react-icons/fa";
 
 import SimpleBackdrop from "@/components/Backdrop";
-import { saludMental03 } from "@/components/imagepath";
 
 const material_descargable = [
   {
@@ -72,9 +71,9 @@ const material_descargable = [
   },
 ]
 const sortedByTitulo = (array) =>
-  array.sort((a, b) => a.titulo.localeCompare(b.titulo, 'es', { sensitivity: 'base' }));
+  array.sort((a, b) => a.descarga_titulo.localeCompare(b.descarga_titulo, 'es', { sensitivity: 'base' }));
 
-const downloadsArray = blogs.flatMap(item => item.downloads);
+const downloadsArray = blogs.flatMap(item => item.descargas);
 const orderedResources = sortedByTitulo(downloadsArray);
 
 const splitArrayByPositions = (array) => {
@@ -87,6 +86,7 @@ const splitArrayByPositions = (array) => {
 const [even, odd] = splitArrayByPositions(orderedResources);
 
 export default function MaterialDescargable() {
+  const isSmallSize = useMediaQuery('(max-width:389px')
   const isMediumSize = useMediaQuery('(min-width:768px)');
   const router = useRouter()
 
@@ -114,55 +114,48 @@ export default function MaterialDescargable() {
         />
       </div>
       }
-      <div className="row flex-column d-flex  sailec" style={{ margin: 0, padding: 0 }}>
-        <div className="col-12" style={{ padding: isMediumSize ? '0 96px 20px' : '98px 32px 20px' }}>
+      <div className="row flex-column d-flex m-0 p-0">
+        <div className="col-12" style={{ padding: isMediumSize ? '0 96px 20px' : '0 32px 20px' }}>
           <div>
             {isMediumSize &&
-              <button className='btn mt-4 mb-5'
-                style={{
-                  border: '1px solid #A6A6A6',
-                  height: '56px',
-                  width: '163px',
-                  padding: '0px 24px',
-                  borderRadius: '100px',
-                }}
+              <button className=' mt-4 mb-5 lato-btn btn-back-desktop'
                 onClick={() => router.back()}
               >
                 <FaArrowLeft /> Volver
               </button>
             }
-            <div className="card-body flex-row d-flex">
-              <h2 className={isMediumSize ? 'blog-title' : 'blog-title-sm'}>
+            <div className="card-body m-0 p-0">
+              <h3 className={isSmallSize ? "header-2-bold" : isMediumSize ? "mega-bold" : "header-1-bold"} style={{ marginTop: !isMediumSize && '120px', textWrap: 'balance' }}>
                 Material descargable
-              </h2>
+              </h3>
             </div>
 
-            <div className={`card-body flex-md-column flex-lg-row d-flex  ${isMediumSize ? 'blog-text' : 'blog-text-sm'}`} >
+            <div  className={` ${isSmallSize ? "body-regular" : "header-3-regular"}`} >
               <p>
                 El Departamento de Salud Mental Estudiantil de UDP (DSME) está constantemente elaborando material para poder prevenir y promocionar el bienestar integral de la comunidad educativa. A continuación, te dejamos algunos documentos que pueden servirte a ti o a alguien que conoces.
               </p>
             </div>
 
-            <div className="row" style={{ margin: 0 }}>
+            <div className="row m-0">
               <div className="col-12 col-lg-6 card-body flex-column d-flex justify-content-start  align-items-center" style={{ gap: '20px', width: isMediumSize ? '45%' : '', marginRight: isMediumSize ? '10px' : 'auto' }}>
                 {even.map(item => (
-                  <div className="col-12" key={item.titulo}>
+                  <div className="col-12" key={item.descarga_titulo}>
                     <Accordion>
                       <AccordionSummary
-                        className="sailec-medium"
+                        className="ui-medium"
                         sx={{ bgcolor: '#99D6E9', color: 'black' }}
                         expandIcon={<ExpandMoreIcon sx={{ color: 'black' }} />}
                         aria-controls="panel3-content"
                         id="panel3-header"
                       >
-                        {item.titulo}
+                        {item.descarga_titulo}
                       </AccordionSummary>
                       <AccordionDetails sx={{ bgcolor: '#E6E9EC' }} className="lato">
-                        {item.bajada}
+                        {item.descarga_bajada}
                       </AccordionDetails>
                       <AccordionActions sx={{ bgcolor: '#E6E9EC' }}>
                         <Button>
-                          <a href={`/downloads/${item.url}`} download={item.url} className='material-descargable-btn'>
+                          <a href={`/downloads/${item.descarga_url}`} download={item.descarga_url} className='material-descargable-btn ui-medium'>
                             Descargar <FaDownload />
                           </a>
                         </Button>
@@ -174,23 +167,23 @@ export default function MaterialDescargable() {
 
               <div className="col-12 col-lg-6 card-body flex-column d-flex  justify-content-start align-items-center" style={{ gap: '20px', width: isMediumSize ? '45%' : '', marginLeft: isMediumSize ? '10px' : 'auto', marginTop: isMediumSize ? '' : '20px' }}>
                 {odd.map(item => (
-                  <div className="col-12" key={item.titulo}>
+                  <div className="col-12" key={item.descarga_titulo}>
                     <Accordion>
                       <AccordionSummary
-                        className="sailec-medium"
+                        className="ui-medium"
                         sx={{ bgcolor: '#99D6E9', color: 'black' }}
                         expandIcon={<ExpandMoreIcon sx={{ color: 'black' }} />}
                         aria-controls="panel3-content"
                         id="panel3-header"
                       >
-                        {item.titulo}
+                        {item.descarga_titulo}
                       </AccordionSummary>
                       <AccordionDetails sx={{ bgcolor: '#E6E9EC' }} className="lato">
-                        {item.bajada}
+                        {item.descarga_bajada}
                       </AccordionDetails>
                       <AccordionActions sx={{ bgcolor: '#E6E9EC' }}>
                         <Button>
-                          <a href={`/downloads/${item.url}`} download={item.url} className='material-descargable-btn'>
+                          <a href={`/downloads/${item.descarga_url}`} download={item.descarga_url} className='material-descargable-btn ui-medium'>
                             Descargar <FaDownload />
                           </a>
                         </Button>
@@ -205,6 +198,5 @@ export default function MaterialDescargable() {
       </div>
       <FooterDae isMediumSize={isMediumSize} />
     </>
-
   );
 }
