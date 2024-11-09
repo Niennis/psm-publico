@@ -15,12 +15,13 @@ const ReserveBtn = ({ text, bgColor, color }) => {
 
   return (
     <>
-      <Link href="https://psm-opal.vercel.app/#estudiantes" >
+      <Link href="#" style={{ cursor: 'not-allowed' }}>
         <button
           className=' btn-reservar ui-large btn-shadow desktop-container '
           style={{
             backgroundColor: bgColor,
             color: color,
+            cursor: 'not-allowed',
           }}
         // onClick={handleOpen}
         >
@@ -33,6 +34,7 @@ const ReserveBtn = ({ text, bgColor, color }) => {
           style={{
             backgroundColor: bgColor,
             color: color,
+            cursor: 'not-allowed',
           }}
         // onClick={handleOpen}
         >

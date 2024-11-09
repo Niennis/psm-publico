@@ -135,7 +135,7 @@ const ReservaTuHora = () => {
                     </Typography>
                     <CardActions sx={{ padding: '0px' }}>
                       <Typography size="medium" sx={{ padding: '0 5px', color: '#000' }}>
-                        <ReserveBtn text={'Reservar'} bgColor={'#FABB00'} color={'#000'} />
+                        {/* <ReserveBtn text={'Reservar'} bgColor={'#FABB00'} color={'#000'} /> */}
                       </Typography>
                     </CardActions>
                   </Card>

@@ -172,7 +172,7 @@ const Header = () => {
                     return (
                       <Link style={{ color: 'black', textDecoration: 'none' }} href={page.url} key={page.title} >
                         <Button
-                          className={`${isExtaLargeSize ? "ui-medium" : "ui-small"} ${activeSection === page.label
+                          className={`${ isExtaLargeSize? "ui-medium" : "ui-small"} ${activeSection === page.label
                             ? 'active-header'
                             : ''
                             }`}
@@ -188,7 +188,7 @@ const Header = () => {
                   )}
                   <Tooltip title="Como trabajamos">
                     <Button
-                      className={`${isExtaLargeSize ? "ui-medium" : "ui-small"} ${activeSection === 'como_trabajamos'
+                      className={`${ isExtaLargeSize? "ui-medium" : "ui-small" } ${activeSection === 'como_trabajamos'
                         ? 'active-header'
                         : ''
                         }`}
@@ -228,23 +228,12 @@ const Header = () => {
                     </Menu>
                   </Box>
                 </Box>
-                {
-                  BOTON_RESERVAR ?
-                    <Box sx={{ flexGrow: 0, display: 'flex', alignItems: 'center' }}>
-                      <ReserveBtn text={'Reservar'} bgColor={'#FABB00'} color={'#000'} />
-                      <Link href="https://psm-opal.vercel.app/#profesionales" style={{ textDecoration: 'none', }} >
-                        <FaUserCircle className={`btn-fa-user btn-fa-user-desktop`} />
-                      </Link>
-                    </Box>
-                    : ''
-                }
               </>
             ) : (
               <>
                 {/*  MENU MOBILE */}
-                <Box sx={{ flexGrow: 1, display: { xs: 'flex', sm: 'flex', md: 'none' }, justifyContent: 'space-between' }}>
+                <Box sx={{ flexGrow: 1, display: { xs: 'flex', sm: 'flex', md: 'none' } }}>
                   <IconButton
-                    className="collapsable-menu"
                     size="large"
                     aria-label="account of current user"
                     aria-controls="menu-appbar"
@@ -342,28 +331,19 @@ const Header = () => {
                       width: '100px',
                     }} />{" "}
                 </Typography>
-                {
-                  BOTON_RESERVAR ?
-                    <Box sx={{ flexGrow: 0, display: 'flex', alignItems: 'center' }}>
-                      <ReserveBtn text={'Reservar'} bgColor={'#FABB00'} color={'#000'} />
-                      <Link href="https://psm-opal.vercel.app/#profesionales" style={{ textDecoration: 'none', }} >
-                        <FaUserCircle className={`btn-fa-user  btn-fa-user-mobile`} />
-                      </Link>
-                    </Box>
-                    : ''
-                }
+
               </>
             )}
-            {/* {
+            {
               BOTON_RESERVAR ?
                 <Box sx={{ flexGrow: 0, display: 'flex', alignItems: 'center' }}>
                   <ReserveBtn text={'Reservar'} bgColor={'#FABB00'} color={'#000'} />
-                  <Link href="https://psm-opal.vercel.app/#profesionales" style={{ textDecoration: 'none',}} >
+                  <Link href="#" style={{ textDecoration: 'none', cursor: 'not-allowed' }} >
                     <FaUserCircle className={`btn-fa-user ${isMediumSize ? "btn-fa-user-mobile" : "btn-fa-user-desktop"}`} />
                   </Link>
                 </Box>
                 : ''
-            } */}
+            }
           </Toolbar>
         </Container>
       </AppBar >

@@ -184,13 +184,13 @@ const truncateTablet = (text) => {
   }
 }
 
-  const imgHeightMobile = '70vh'
+  const imgHeightMobile = '80vh'
   const imgHeightDesktop = '100vh'
 
   const slideStylesMobile = {
     backgroundColor: styles[currentIndex].color,
     width: '100%',
-    height: isShortDevice ? '85vh' : imgHeightMobile,
+    height: isShortDevice ? '100vh' : imgHeightMobile,
     backgroundPosition: 'center',
     backgroundSize: 'cover',
   }
@@ -227,8 +227,8 @@ const truncateTablet = (text) => {
 
   const boxStyleMobile = {
     display: 'flex',
-    height: isShortDevice ? '85vh' : imgHeightMobile, // 100vh si es chico, imgHeightMobile si es grande
-    marginTop: isShortDevice ? '-85vh' : 'calc(-70vh)', // -100vh si es chico, 'calc(-100vh + 150px)' si es grande
+    height: isShortDevice ? '100vh' : imgHeightMobile, // 100vh si es chico, imgHeightMobile si es grande
+    marginTop: isShortDevice ? '-100vh' : 'calc(-80vh)', // -100vh si es chico, 'calc(-100vh + 150px)' si es grande
     padding: '24px 16px',
     textWrap: 'pretty',
     width: '100vw',
@@ -320,14 +320,14 @@ const truncateTablet = (text) => {
             {slides.map((slide, slideIndex) => (
               <Tab
                 key={slideIndex}
-                className={`col-3 white_menu_urls ${isLargeDevice ? "header-3-bold" : "title-medium"}`}
+                className={`col-3 white_menu_urls ${isLargeDevice ? "header-2-bold" : "title-medium"}`}
                 onClick={() => goToSlide(slideIndex)}
                 sx={{
                   alignItems: 'baseline',
                   bgcolor: styles[slideIndex].color,
                   color: '#fff',
-                  // fontSize: isMediumDevice ? '16px' : isShort ? '20px' : '24px',
-                  // fontWeight: 700,
+                  fontSize: isMediumDevice ? '16px' : isShort ? '20px' : '24px',
+                  fontWeight: 700,
                   height: '97px',
                   lineHeight: isMediumDevice ? '22px' : '32px',
                   maxWidth: 'unset',
@@ -351,7 +351,7 @@ const truncateTablet = (text) => {
             <div className="col-sm-12" style={{
               display: 'flex',
               flexDirection: 'column',
-              justifyContent: 'space-between',
+              justifyContent: 'space-evenly',
             }
             }>
               {/* <div style={{ minHeight: '30vh' }}> */}

@@ -13281,7 +13281,7 @@ button#simple-tab-0.MuiButtonBase-root.MuiTab-root.MuiTab-textColorPrimary.Mui-s
 }
 
 .btn-fa-user-mobile{
-  font-size: 40px;
+  font-size: 38px;
 }
 
 .btn-fa-user-desktop{
@@ -13684,12 +13684,4 @@ td:has(div.text-end) {
 
 .wrap-balance {
   text-wrap: balance;
-}
-
-.css-1bi6phk-MuiToolbar-root{
-  justify-content: space-between;
-}
-
-div.MuiBox-root.css-1ntq32v{
-  display: contents;
 }

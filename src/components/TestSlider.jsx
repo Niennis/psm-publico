@@ -141,7 +141,7 @@ const TestSlider = ({ slides, innerRef }) => {
                     if (slideIndex < slides.length) {
                       const slide = slides[slideIndex];
                       return (
-                        <div key={slideIndex} className="col-4 col-md-5 col-lg-5 col-xl-4" style={{ fontSize: '24px', fontWeight: 400, lineHeight: '32px', /* width: isLargeSize ? '35vw' :'100%' */ }}>
+                        <div key={slideIndex} className="col-4 col-md-5" style={{ fontSize: '24px', fontWeight: 400, lineHeight: '32px', width: isLargeSize ? '30vw' :'100%' }}>
                           <Card
                             sx={{
                               boxShadow: '0px 4px 4px 0px rgba(0,0,0,0.45)',
@@ -165,7 +165,7 @@ const TestSlider = ({ slides, innerRef }) => {
                             <CardContent>
                               <Typography variant="body2" color="text.secondary" className="header-3-bold"
                                 sx={{ color: '#000', height: '2em' }}>{slide.titulo}</Typography>
-                              <Typography variant="body2" color="text.secondary" className="body-large-regular" sx={{ height: '5.5em', minHeight: 'fit-content' }}>{slide.bajada}</Typography>
+                              <Typography variant="body2" color="text.secondary" className="body-large-regular" sx={{ height: '5.5em' }}>{slide.bajada}</Typography>
                             </CardContent>
                             <CardActions disableSpacing>
                               <Grid container direction="row" justifyContent="flex-start" alignItems="baseline">

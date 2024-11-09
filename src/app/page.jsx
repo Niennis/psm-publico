@@ -187,8 +187,8 @@ export default function Home() {
       )}
 
       <div className="row m-0 p-0">
-        <div className="col-sm-12 text-center p-0 " style={{ margin: '32px 0 0' }}>
-          <h2 className="header-2-bold">Preguntas frecuentes</h2>
+        <div className="col-sm-12 text-center p-0" style={{ margin: '32px 0 0' }}>
+          <h2 style={{ fontSize: '32px', fontWeight: 400, lineHeight: '40px' }}>Preguntas frecuentes</h2>
         </div>
       </div>
       <FrequentAskedQuestions innerRef={el => sectionRefs.current[0] = el} className="home-section" />
